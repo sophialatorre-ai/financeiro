@@ -6,6 +6,8 @@ if (isset($_SESSION['usuario_id'])) {
     header('Location: index.php');
     exit;
 }
+
+
 ?>
 
 <!DOCTYPE html>
@@ -19,6 +21,9 @@ if (isset($_SESSION['usuario_id'])) {
 
 <body>
     <h1>Login - Sistema Financeiro</h1>
+
+    <?php exibir_mensagem(); ?>
+
     <form action="autenticar.php" method="post">
         <div>
             <label for="email">E-mail:</label>
@@ -33,7 +38,7 @@ if (isset($_SESSION['usuario_id'])) {
         </div>
     </form>
 
-    <p>Nâo tem conta?<a href="registro.php"> Cadastre-se aqui.</a></p>
+    <p>Nâo tem conta?<a href="registro.php"> Cadastre-se aqui.</a></p>    
 </body>
 
 </html>

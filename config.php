@@ -16,4 +16,9 @@ try {
     die("Erro na conexão com o banco de dados:". $e->getMessage());
     
 }
+
+//Iniciar sessão se ainda não foi iniciada
+if(session_start() === PHP_SESSION_NONE){
+    session_start();
+}
 ?>
