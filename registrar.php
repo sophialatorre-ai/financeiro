@@ -3,28 +3,28 @@ require_once 'config.php';
 require_once 'mensagens.php';
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
-    $nome = $_POST['nome'] ?? '';
-    $email = $_POST['email'] ?? '';
-    $senha = $_POST['senha'] ?? '';
-    $confirmar_senha = $_POST['confirmar_senha'] ?? '';
+    $nome = $_conn['nome'] ?? '';
+    $email = $_conn['email'] ?? '';
+    $senha = $_conn['senha'] ?? '';
+    $confirmar_senha = $_conn['confirmar_senha'] ?? '';
     
     // Validar campos
     if (empty($nome) || empty($email) || empty($senha) || empty($confirmar_senha)) {
-        set_mensagem_erro('Preencha todos os campos.');
+        set_mensagem('Preencha todos os campos.','erro');
         header('Location: registro.php');
         exit;
     }
     
     // Validar se as senhas coincidem
     if ($senha !== $confirmar_senha) {
-        set_mensagem_erro('As senhas não coincidem.');
+        set_mensagem('As senhas não coincidem.','erro');
         header('Location: registro.php');
         exit;
     }
     
     // Validar tamanho mínimo da senha
     if (strlen($senha) < 6) {
-        set_mensagem_erro('A senha deve ter no mínimo 6 caracteres.');
+        set_mensagem('A senha deve ter no mínimo 6 caracteres.','erro');
         header('Location: registro.php');
         exit;
     }
@@ -36,7 +36,7 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->execute();
     
     if ($stmt->fetch()) {
-        set_mensagem_erro('Este e-mail já está cadastrado.');
+        set_mensagem('Este e-mail já está cadastrado.','');
         header('Location: registro.php');
         exit;
     }
@@ -52,11 +52,11 @@ if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $stmt->bindParam(':senha', $senha_hash);
     
     if ($stmt->execute()) {
-        set_mensagem_sucesso('Cadastro realizado com sucesso! Faça login para continuar.');
+        set_mensagem('Cadastro realizado com sucesso! Faça login para continuar.', 'sucesso');
         header('Location: login.php');
         exit;
     } else {
-        set_mensagem_erro('Erro ao realizar cadastro. Tente novamente.');
+        set_mensagem('Erro ao realizar cadastro. Tente novamente.','erro');
         header('Location: registro.php');
         exit;
     }

@@ -10,9 +10,9 @@ if (!isset($_SESSION['usuario_id'])) {
 
 if ($_SERVER['REQUEST_METHOD'] === 'POST') {
     $usuario_id = $_SESSION['usuario_id'];
-    $id_categoria = $_POST['id_categoria'] ?? null;
-    $nome = $_POST['nome'] ?? '';
-    $tipo = $_POST['tipo'] ?? '';
+    $id_categoria = $_conn['id_categoria'] ?? null;
+    $nome = $_conn['nome'] ?? '';
+    $tipo = $_conn['tipo'] ?? '';
     
     // Validar campos
     if (empty($nome) || empty($tipo)) {
